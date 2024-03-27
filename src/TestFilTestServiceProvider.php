@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Webplusm\TestFilTest;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,14 +13,14 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use Webplusm\TestFilTest\Commands\TestFilTestCommand;
+use Webplusm\TestFilTest\Testing\TestsTestFilTest;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class TestFilTestServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'test-fil-test';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'test-fil-test';
 
     public function configurePackage(Package $package): void
     {
@@ -36,7 +36,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('webplusm/test-fil-test');
             });
 
         $configFileName = $package->shortName();
@@ -82,18 +82,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/test-fil-test/{$file->getFilename()}"),
+                ], 'test-fil-test-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton());
+        Testable::mixin(new TestsTestFilTest());
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'webplusm/test-fil-test';
     }
 
     /**
@@ -102,9 +102,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('test-fil-test', __DIR__ . '/../resources/dist/components/test-fil-test.js'),
+            Css::make('test-fil-test-styles', __DIR__ . '/../resources/dist/test-fil-test.css'),
+            Js::make('test-fil-test-scripts', __DIR__ . '/../resources/dist/test-fil-test.js'),
         ];
     }
 
@@ -114,7 +114,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+            TestFilTestCommand::class,
         ];
     }
 
@@ -148,7 +148,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_test-fil-test_table',
         ];
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Webplusm\TestFilTest;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class TestFilTestPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'test-fil-test';
     }
 
     public function register(Panel $panel): void
